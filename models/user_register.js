@@ -26,6 +26,8 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     sequelize,
     modelName: 'user_Register',
+    tableName: "user_Registers",   // ✅ EXACT NAME FROM MIGRATION
+    timestamps: true,
   });
   return user_Register;
 };
