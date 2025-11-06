@@ -1,0 +1,17 @@
+// emailTransporter.js
+require('dotenv').config();
+
+const nodemailer = require('nodemailer');
+
+// console.log("EMAIL_USER:", process.env.EMAIL_USER); // debug
+// console.log("EMAIL_PASS loaded:", !!process.env.EMAIL_PASS); // debug
+
+const transporter = nodemailer.createTransport({
+  service: 'gmail',
+  auth: {
+    user: process.env.EMAIL_USER, // Your email address
+    pass: process.env.EMAIL_PASS, // Your email password or app-specific password
+  },
+});
+
+module.exports = transporter;
