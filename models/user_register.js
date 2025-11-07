@@ -28,6 +28,7 @@ module.exports = (sequelize, DataTypes) => {
     modelName: 'user_Register',
     tableName: "user_Registers",   // ✅ EXACT NAME FROM MIGRATION
     timestamps: true,
+    freezeTableName: true,
   });
   return user_Register;
 };
