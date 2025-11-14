@@ -3,7 +3,7 @@ const multer = require("multer");
 const path = require("path");
 const router = express.Router();
 const { Doctor } = require("../models");
-import { CloudinaryStorage } from "multer-storage-cloudinary";
+const { CloudinaryStorage } = require("multer-storage-cloudinary");
 const { doctorvalidation } = require("../Validation/user.validation");
 const NodeCache = require("node-cache");
 
@@ -27,6 +27,16 @@ module.exports = { cloudinary };
 //   },
 // });
 // const upload = multer({ storage });
+// Cloudinary Storage
+const storage = new CloudinaryStorage({
+  cloudinary: cloudinary,
+  params: {
+    folder: "hospital_doctors",
+    allowed_formats: ["jpg", "png", "jpeg", "webp"]
+  },
+});
+
+const upload = multer({ storage });
 
 
 
@@ -74,9 +84,7 @@ router.get("/doctors/:hospital_id", async (req, res) => {
       doctor_name: doc.doctor_name,
       doctor_email: doc.doctor_email,
       specialty: doc.specialty,
-      image: doc.image
-        ? `${process.env.BASE_URL || "https://hospital-management-0b6s.onrender.com"}${doc.image}`
-        : null,
+      image: doc.image || null,
       availability: Array.isArray(doc.availability)
         ? doc.availability
         : (() => {
@@ -135,7 +143,7 @@ router.post("/adddoctor", upload.single("image"), doctorvalidation, async (req, 
       return res.status(400).json({ message: "Invalid availability format." });
     }
 
-    const imagePath = req.file ? `/uploads/${req.file.filename}` : null;
+    const imagePath = req.file ? req.file.path : null;
 
     const newDoctor = await Doctor.create({
       doctor_name,
