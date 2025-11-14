@@ -4,6 +4,9 @@ const bodyParser = require("body-parser");
 const dotenv = require("dotenv");
 dotenv.config();
 const path = require("path");
+const helmet = require("helmet");
+const compression = require("compression");
+
 
 // Database connection
 require("./config/database");
@@ -15,12 +18,14 @@ const authenticate = require("./api/authentication");
 const emailRoutes = require("./api/appointment");
 
 const app = express();
+app.use(helmet());          // adds secure HTTP headers
+app.use(compression());
 
-// Middleware
 app.use(cors());
 app.use(bodyParser.json());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
 // Routes
