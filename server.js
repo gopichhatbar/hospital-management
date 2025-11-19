@@ -27,7 +27,9 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
-
+app.get("/api/ping", (req, res) => {
+  res.status(200).send("pong");
+});
 // Routes
 app.get("/", (req, res) => res.send("Node.js Backend is Running!"));
 app.use("/addhospital", addhospital);

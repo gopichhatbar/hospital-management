@@ -10,9 +10,7 @@ const {Registervalidation} = require("../Validation/user.validation");
 
 const SECRET_KEY = "JWT_SECRET"; // Replace with env variable
 
-app.get("/api/ping", (req, res) => {
-  res.status(200).send("pong");
-});
+
 
 // 🔹 Register Route
 router.post("/register",Registervalidation,async (req, res) => {
