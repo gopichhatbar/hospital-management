@@ -4,6 +4,8 @@ const router = express.Router();
 const { hospitalValidation } = require("../Validation/user.validation");
 const NodeCache = require("node-cache");
 const cache = new NodeCache({ stdTTL: 600 }); // cache 10 minutes
+const fs = require("fs");
+const path = require("path");
 
 
 // router.get("/hospitals", async (req, res) => {
