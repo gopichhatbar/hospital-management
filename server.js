@@ -38,5 +38,13 @@ app.use("/authenticate", authenticate);
 app.use("/mailsent", emailRoutes);
 
 // Start server
-const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+sequelize.sync({ alter: true })  // creates tables if missing, updates if changed
+  .then(() => {
+    console.log("All tables synced!");
+
+    const PORT = process.env.PORT || 5000;
+    app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+  })
+  .catch(err => {
+    console.error("Unable to sync tables:", err);
+  });
