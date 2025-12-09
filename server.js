@@ -9,7 +9,7 @@ const compression = require("compression");
 
 
 // Database connection
-require("./config/database");
+const { sequelize } = require("./config/database");
 
 // Routes
 const addhospital = require("./api/addhospital");
