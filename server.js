@@ -9,7 +9,7 @@ const compression = require("compression");
 
 
 // Database connection
-const { sequelize } = require("./config/database");
+require("./config/database");
 
 // Routes
 const addhospital = require("./api/addhospital");
@@ -38,13 +38,5 @@ app.use("/authenticate", authenticate);
 app.use("/mailsent", emailRoutes);
 
 // Start server
-sequelize.sync({ alter: true })  // creates tables if missing, updates if changed
-  .then(() => {
-    console.log("All tables synced!");
-
-    const PORT = process.env.PORT || 5000;
-    app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
-  })
-  .catch(err => {
-    console.error("Unable to sync tables:", err);
-  });
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
