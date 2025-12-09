@@ -14,14 +14,14 @@ async function generateSitemap() {
         sitemap += `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n`;
 
         // ✅ Add main pages
-        sitemap += `  <url><loc>https://mellifluous-pudding-185a54.netlify.app/</loc><priority>1.0</priority></url>\n`;
-        sitemap += `  <url><loc>https://mellifluous-pudding-185a54.netlify.app/userRegister</loc><priority>0.8</priority></url>\n`;
-        sitemap += `  <url><loc>https://mellifluous-pudding-185a54.netlify.app/userLogin</loc><priority>0.8</priority></url>\n`;
+        sitemap += `  <url><loc>https://endearing-tulumba-e6b525.netlify.app/</loc><priority>1.0</priority></url>\n`;
+        sitemap += `  <url><loc>https://endearing-tulumba-e6b525.netlify.app/userRegister</loc><priority>0.8</priority></url>\n`;
+        sitemap += `  <url><loc>https://endearing-tulumba-e6b525.netlify.app/userLogin</loc><priority>0.8</priority></url>\n`;
 
         // ✅ Add all hospitals dynamically
         hospitals.forEach(hospital => {
             sitemap += `  <url>
-  <loc>https://mellifluous-pudding-185a54.netlify.app/hospital/${hospital.hospital_id}</loc>
+  <loc>https://endearing-tulumba-e6b525.netlify.app/hospital/${hospital.hospital_id}</loc>
   <priority>0.8</priority>
   <lastmod>${new Date().toISOString()}</lastmod>
 </url>\n`;
@@ -35,8 +35,8 @@ async function generateSitemap() {
             fs.mkdirSync(PUBLIC_PATH, { recursive: true });
         }
 
-        fs.writeFileSync(`${PUBLIC_PATH}/sitemap.xml`, sitemap);
-        console.log('✅ Sitemap generated in public/sitemap.xml');
+        fs.writeFileSync(`${PUBLIC_PATH}/sitemap.txt`, sitemap);
+        console.log('✅ Sitemap generated in public/sitemap.txt');
     } catch (error) {
         console.error('❌ Error generating sitemap:', error.message);
     }
